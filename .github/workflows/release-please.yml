@@ -78,7 +78,7 @@ jobs:
             github-token: ${{ secrets.DEPENDENCY_TOKEN }}
         - name: Strip release artifact
           run: |
-            ./tools/NStrip.exe -cg -p --cg-exclude-events artifact/BepInEx/plugins/pi_utils/pi_utils.dll ./nuget/lib/pi_utils.dll
+            ./tools/NStrip.exe artifact/BepInEx/plugins/pi_utils/pi_utils.dll ./nuget/lib/pi_utils.dll
         - name: Pack nuget
           run: nuget pack nuget -OutputFileNamesWithoutVersion -OutputDirectory build -Properties "git=https://github.com/${{ github.repository }}.git;name=${{ github.event.repository.name }};author=${{ github.repository_owner }};description=${{ github.event.repository.description }}"
         - name: Publish nuget
