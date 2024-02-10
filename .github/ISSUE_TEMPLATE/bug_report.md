@@ -26,7 +26,7 @@ Steps to reproduce the behavior:
 **Desktop (please complete the following information):**
  - OS: [e.g. Linux <Distro and Version>, Windows 10]
  - Game and Version; [e.g. Techtonica v0.2.0h]
- - Mod Version: 0.1.0 <!-- x-release-please-version -->
+ - Mod Version: 0.1.1 <!-- x-release-please-version -->
 
 **Additional context**
 
