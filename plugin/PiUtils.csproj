@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>pi_utils</AssemblyName>
     <Product>Pi Utils</Product>
-    <Version>0.1.1</Version> <!-- x-release-please-version -->
+    <Version>0.1.2</Version> <!-- x-release-please-version -->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <RestoreAdditionalProjectSources>
