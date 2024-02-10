@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/Xenira/PiUtils/compare/v0.1.1...v0.1.2) (2024-02-10)
+
+
+### 👷 Build System
+
+* **nuget:** fix dll striping ([#5](https://github.com/Xenira/PiUtils/issues/5)) ([322cf2a](https://github.com/Xenira/PiUtils/commit/322cf2a0dc959080b65bfa69edd6ca7a10a39aef))
+
 ## [0.1.1](https://github.com/Xenira/PiUtils/compare/v0.1.0...v0.1.1) (2024-02-10)
 
 
