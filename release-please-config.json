@@ -9,7 +9,7 @@
         "README.adoc",
         ".github/ISSUE_TEMPLATE/bug_report.md",
         "plugin/PiUtils.csproj",
-        "nuget/PiUtilsDefinitions.cs",
+        "nuget/PiUtilsDefinitions.nuspec",
         {
             "type": "json",
             "path": "manifest.json",
