@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/Xenira/PiUtils/compare/v0.1.3...v0.1.4) (2024-02-10)
+
+
+### 👷 Build System
+
+* add bepinex dependency ([#10](https://github.com/Xenira/PiUtils/issues/10)) ([6067bd1](https://github.com/Xenira/PiUtils/commit/6067bd1824596591880c59f914575171c903fd35))
+
 ## [0.1.3](https://github.com/Xenira/PiUtils/compare/v0.1.2...v0.1.3) (2024-02-10)
 
 
