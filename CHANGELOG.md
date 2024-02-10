@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/Xenira/PiUtils/compare/v0.1.2...v0.1.3) (2024-02-10)
+
+
+### 👷 Build System
+
+* **nuget:** fix version and removed publicising ([8f6f062](https://github.com/Xenira/PiUtils/commit/8f6f062ed965b2ebf9b5703ede378cdf82c8b5a2))
+
 ## [0.1.2](https://github.com/Xenira/PiUtils/compare/v0.1.1...v0.1.2) (2024-02-10)
 
 
