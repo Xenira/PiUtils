@@ -1,0 +1,83 @@
+on:
+    workflow_run:
+      workflows: [".Net"]
+      branches: ["master"]
+      types:
+        - completed
+
+permissions:
+    contents: write
+    pull-requests: write
+
+name: release-please
+
+jobs:
+    release-please:
+      runs-on: ubuntu-latest
+      steps:
+        - id: release
+          uses: google-github-actions/release-please-action@v4
+          with:
+            token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+            config-file: release-please-config.json
+        - name: Download release artifact
+          if: ${{ steps.release.outputs.release_created }}
+          uses: actions/download-artifact@v4
+          with:
+            name: release-artifact
+            path: artifact
+            run-id: ${{ github.event.workflow_run.id }}
+            github-token: ${{ secrets.DEPENDENCY_TOKEN }}
+        - name: Zip release artifact
+          if: ${{ steps.release.outputs.release_created }}
+          run: |
+            cd artifact && npx downdoc -a env-github -a env-thunderstore README.adoc && zip -r pi_utils-${{ steps.release.outputs.tag_name }}-thunderstore.zip ./ && cd ..
+            mv artifact/pi_utils-${{ steps.release.outputs.tag_name }}-thunderstore.zip .
+            rm artifact/README.md
+            cd artifact && zip -r pi_utils-${{ steps.release.outputs.tag_name }}.zip ./ && cd ..
+            mv artifact/pi_utils-${{ steps.release.outputs.tag_name }}.zip .
+        - name: Upload release artifact
+          if: ${{ steps.release.outputs.release_created }}
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: |
+            gh release upload ${{ steps.release.outputs.tag_name }} pi_utils-${{ steps.release.outputs.tag_name }}.zip --repo ${{ github.repository }}
+        - name: Upload to Thunderstore
+          uses: GreenTF/upload-thunderstore-package@v4.3
+          if: ${{ steps.release.outputs.release_created }}
+          with:
+            namespace: "3_141"
+            community: techtonica
+            name: Pi Utils
+            description: Utilities for my mods
+            categories: |
+              libraries
+              tools
+              misc
+            file: pi_utils-${{ steps.release.outputs.tag_name }}-thunderstore.zip
+            version: "${{ steps.release.outputs.major }}.${{ steps.release.outputs.major }}.${{ steps.release.outputs.patch }}"
+            repo: thunderstore.io
+            token: ${{ secrets.THUNDERSTORE_KEY }}
+
+    nuget:
+      runs-on: windows-2019
+      needs: release-please
+      if: ${{ needs.release-please.outputs.release_created }}
+      steps:
+        - uses: actions/checkout@v2
+        - uses: NuGet/setup-nuget@v1.0.5
+        - name: Download release artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: release-artifact
+            path: artifact
+            run-id: ${{ github.event.workflow_run.id }}
+            github-token: ${{ secrets.DEPENDENCY_TOKEN }}
+        - name: Strip release artifact
+          run: |
+            ./tools/NStrip.exe -cg -p --cg-exclude-events artifact/BepInEx/plugins/pi_utils/pi_utils.dll ./nuget/lib
+        - name: Pack nuget
+          run: nuget pack nuget -OutputFileNamesWithoutVersion -OutputDirectory build -Properties "git=https://github.com/${{ github.repository }}.git;name=${{ github.event.repository.name }};author=${{ github.repository_owner }};description=${{ github.event.repository.description }}"
+        - name: Publish nuget
+          run: |
+            nuget push "build/${{ github.event.repository.name }}.nupkg" -ApiKey ${{ secrets.NUGET_KEY }} -Source https://api.nuget.org/v3/index.json

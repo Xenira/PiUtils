@@ -1,0 +1,7 @@
+{
+    "name": "PiUtils",
+    "version_number": "0.6.0",
+    "website_url": "https://github.com/Xenira/PiUtils",
+    "description": "Utility mod for my other mods",
+    "dependencies": []
+}
