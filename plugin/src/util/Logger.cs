@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using BepInEx.Logging;
 using UnityEngine;
 
@@ -6,51 +7,64 @@ namespace PiUtils.Util;
 
 public class PluginLogger
 {
-	private ManualLogSource logger;
-	private string prefix;
+	public static Dictionary<string, ManualLogSource> loggers = new Dictionary<string, ManualLogSource>();
 
-	public PluginLogger(ManualLogSource logger, string prefix)
+	private string prefix;
+	private ManualLogSource logger
 	{
-		this.logger = logger;
+		get
+		{
+			if (loggers.ContainsKey(prefix))
+			{
+				return loggers[prefix];
+			}
+
+			var logger = BepInEx.Logging.Logger.CreateLogSource(prefix);
+			loggers.Add(prefix, logger);
+			return logger;
+		}
+	}
+
+	public PluginLogger(string prefix)
+	{
 		this.prefix = prefix;
 	}
-	public PluginLogger(ManualLogSource logger, Type type)
+
+	public PluginLogger(Type type) : this(type.FullName)
 	{
-		this.logger = logger;
-		prefix = type.FullName;
 	}
 
-	public static PluginLogger GetLogger<T>(ManualLogSource logger)
+	public static PluginLogger GetLogger<T>()
 	{
-		return new PluginLogger(logger, typeof(T));
+		return new PluginLogger(typeof(T));
 	}
 
 	public void LogInfo(string message)
 	{
-		logger.LogInfo($"[{prefix}] ({Time.frameCount}) {message}");
+		logger.LogInfo($"<{Time.frameCount}> {message}");
 	}
 
 	public void LogDebug(string message)
 	{
-		logger.LogDebug($"[{prefix}] ({Time.frameCount}) {message}");
+		logger.LogDebug($"<{Time.frameCount}> {message}");
 	}
 
 	public void LogWarning(string message)
 	{
-		logger.LogWarning($"[{prefix}] ({Time.frameCount}) {message}");
+		logger.LogWarning($"<{Time.frameCount}> {message}");
 	}
 
 	public void LogError(string message)
 	{
-		logger.LogError($"[{prefix}] ({Time.frameCount}) {message}");
+		logger.LogError($"<{Time.frameCount}> {message}");
 	}
 
-	internal void LogTrace(string v)
+	public void LogTrace(string v)
 	{
 		if (!ModConfig.TraceLogEnabled())
 		{
 			return;
 		}
-		logger.LogDebug($"[{prefix}] ({Time.frameCount}) {v}");
+		logger.LogDebug($"<{Time.frameCount}> {v}");
 	}
 }

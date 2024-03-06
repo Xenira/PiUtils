@@ -13,4 +13,3 @@ cd ..
 # Copy the mod dll to the mods folder
 echo "Copying the mod dll to the mods folder..."
 cp ./plugin/bin/Debug/netstandard2.1/$MOD_DLL.* "$GAME_PATH/BepInEx/plugins/"
-cp ./plugin/bin/Debug/netstandard2.1/$MOD_DLL.* "../TTIK/libs/"
