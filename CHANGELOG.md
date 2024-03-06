@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.2.0](https://github.com/Xenira/PiUtils/compare/v0.1.4...v0.2.0) (2024-03-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* **logger:** Logger no longer requires plugin specific logger and logs using class name instead of plugin name.
+
+### ✨ Features
+
+* **behaviours:** add grabable ([#19](https://github.com/Xenira/PiUtils/issues/19)) ([7721250](https://github.com/Xenira/PiUtils/commit/77212505b2cf4d4151c96f7cc6993ea0be8ee88f))
+* **callback:** add callback utils ([#18](https://github.com/Xenira/PiUtils/issues/18)) ([3e6de5c](https://github.com/Xenira/PiUtils/commit/3e6de5c8dd5f8c005a331a584ab7720e8745d7da))
+* **logger:** improve logger dx ([#13](https://github.com/Xenira/PiUtils/issues/13)) ([85f243b](https://github.com/Xenira/PiUtils/commit/85f243b1405b937aff081ff68b5b140a1ad3df6f))
+
+
+### ♻️ Code Refactoring
+
+* **util:** change bitstate to not be static ([#20](https://github.com/Xenira/PiUtils/issues/20)) ([b7932ab](https://github.com/Xenira/PiUtils/commit/b7932ab07f49365b8c8aec87c8d404cc6c38dd33))
+
 ## [0.1.4](https://github.com/Xenira/PiUtils/compare/v0.1.3...v0.1.4) (2024-02-10)
 
 
