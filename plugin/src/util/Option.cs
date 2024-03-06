@@ -11,6 +11,16 @@ public class Option<T> : IEnumerable<T>
 		this.data = data;
 	}
 
+	public static Option<T> New(T value)
+	{
+		if (value == null)
+		{
+			return None();
+		}
+
+		return Some(value);
+	}
+
 	public static Option<T> Some(T value)
 	{
 		return new Option<T>([value]);
@@ -19,6 +29,11 @@ public class Option<T> : IEnumerable<T>
 	public static Option<T> None()
 	{
 		return new Option<T>([]);
+	}
+
+	public bool IsSome()
+	{
+		return data.Length > 0;
 	}
 
 	public IEnumerator<T> GetEnumerator()
