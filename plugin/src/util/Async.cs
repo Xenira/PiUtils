@@ -64,11 +64,32 @@ public class Async
 			}
 		}
 	}
+
+	public static IEnumerator DelayUntilSet<T>(Action callback, T value)
+	{
+		yield return new WaitUntil(() => value != null);
+		callback();
+	}
+
+	public static IEnumerator DelayUntil(IEnumerator condition, Action callback)
+	{
+		while (!condition.MoveNext())
+		{
+			yield return null;
+		}
+		callback();
+	}
+
+	public static IEnumerator DelayUntil(Action callback, Func<bool> condition)
+	{
+		yield return new WaitUntil(condition);
+		callback();
+	}
 }
 
 public class AsyncGameObject : MonoBehaviour
 {
-	private static PluginLogger Logger = PluginLogger.GetLogger<AsyncGameObject>(PiUtils.Logger);
+	private static PluginLogger Logger = PluginLogger.GetLogger<AsyncGameObject>();
 	private static AsyncGameObject instance;
 
 	private static AsyncGameObject Instance
@@ -111,6 +132,11 @@ public class AsyncGameObject : MonoBehaviour
 		return Instance.timeoutFrames(callback, frames);
 	}
 
+	public static Coroutine NextFrame(Action callback)
+	{
+		return Instance.timeoutFrames(callback, 1);
+	}
+
 	private Coroutine timeoutFrames(Action callback, int frames)
 	{
 		return StartCoroutine(Async.TimeoutFrames(callback, frames));
@@ -124,6 +150,26 @@ public class AsyncGameObject : MonoBehaviour
 	private Coroutine interval(Action callback, float seconds, float startInSeconds, int? cnt = null)
 	{
 		return StartCoroutine(Async.Interval(callback, seconds, startInSeconds, cnt));
+	}
+
+	public static Coroutine DelayUntilSet<T>(Action callback, T value)
+	{
+		return Instance.delayUntilSet(callback, value);
+	}
+
+	private Coroutine delayUntilSet<T>(Action callback, T value)
+	{
+		return StartCoroutine(Async.DelayUntilSet(callback, value));
+	}
+
+	public static Coroutine DelayUntil(Action callback, Func<bool> condition)
+	{
+		return Instance.delayUntil(callback, condition);
+	}
+
+	private Coroutine delayUntil(Action callback, Func<bool> condition)
+	{
+		return StartCoroutine(Async.DelayUntil(callback, condition));
 	}
 
 	public static void Cancel(Coroutine coroutine)

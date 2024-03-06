@@ -4,7 +4,7 @@ namespace PiUtils.Util;
 
 public class ObjectPosition
 {
-	private static PluginLogger Logger = PluginLogger.GetLogger<ObjectPosition>(PiUtils.Logger);
+	private static PluginLogger Logger = PluginLogger.GetLogger<ObjectPosition>();
 
 	public static Vector3 addLocalPositions(Transform transform, Transform stopAt = null)
 	{

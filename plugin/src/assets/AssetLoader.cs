@@ -8,7 +8,7 @@ namespace PiUtils.Assets;
 
 public class AssetLoader
 {
-	private static PluginLogger Logger = PluginLogger.GetLogger<AssetLoader>(PiUtils.Logger);
+	private static PluginLogger Logger = PluginLogger.GetLogger<AssetLoader>();
 
 	private string assetPath = "assets";
 
