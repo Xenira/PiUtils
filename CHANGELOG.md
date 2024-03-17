@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/Xenira/PiUtils/compare/v0.2.0...v0.3.0) (2024-03-17)
+
+
+### ✨ Features
+
+* **behaviour:** add interactable ([#22](https://github.com/Xenira/PiUtils/issues/22)) ([8b24847](https://github.com/Xenira/PiUtils/commit/8b24847c31267eab382fe994672fd83c620eb3d3))
+
 ## [0.2.0](https://github.com/Xenira/PiUtils/compare/v0.1.4...v0.2.0) (2024-03-06)
 
 
