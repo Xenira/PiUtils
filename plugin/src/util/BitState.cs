@@ -44,8 +44,8 @@ public class BitState
 		return (state & newState) != 0;
 	}
 
-	public bool hasAnyState(long newState)
+	public bool isState(long newState)
 	{
-		return (state & newState) != 0;
+		return state == newState;
 	}
 }

@@ -59,6 +59,11 @@ public class PluginLogger
 		logger.LogError($"<{Time.frameCount}> {message}");
 	}
 
+	public void LogError(string message, Exception e)
+	{
+		LogError(message + "\n" + e.ToString());
+	}
+
 	public void LogTrace(string v)
 	{
 		if (!ModConfig.TraceLogEnabled())
