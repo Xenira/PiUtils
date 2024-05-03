@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/Xenira/PiUtils/compare/v0.3.0...v0.4.0) (2024-05-03)
+
+
+### ✨ Features
+
+* **assets:** add dependency loader ([#24](https://github.com/Xenira/PiUtils/issues/24)) ([c26bbec](https://github.com/Xenira/PiUtils/commit/c26bbec75e2d38daf9e78a1e605e00971e442006))
+
 ## [0.3.0](https://github.com/Xenira/PiUtils/compare/v0.2.0...v0.3.0) (2024-03-17)
 
 
